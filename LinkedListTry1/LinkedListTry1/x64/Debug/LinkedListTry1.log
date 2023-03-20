@@ -1,0 +1,10 @@
+﻿  LinkedListTry1.c
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(111,18): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(134,2): warning C4013: “gets”未定义；假设外部返回 int
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(135,19): warning C4047: “=”:“char”与“char [2]”的间接级别不同
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(513,2): warning C4098: “main”:“void”函数返回值
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(194): warning C4715: “GetP”: 不是所有的控件路径都返回值
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(301): warning C4715: “DeleteList”: 不是所有的控件路径都返回值
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(375): warning C4715: “SearchList”: 不是所有的控件路径都返回值
+D:\VS2022\qg1\LinkedListTry1\LinkedListTry1\LinkedListTry1.c(450): warning C4715: “IsLoopList”: 不是所有的控件路径都返回值
+  LinkedListTry1.vcxproj -> D:\VS2022\qg1\LinkedListTry1\x64\Debug\LinkedListTry1.exe

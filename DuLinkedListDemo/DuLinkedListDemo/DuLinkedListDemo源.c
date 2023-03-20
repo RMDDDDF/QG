@@ -120,22 +120,25 @@ Status InitList_DuL(DuLinkedList* L)
 Status DestroyList_DuL(DuLinkedList* L)
 {
 
-	if ((*L)->prior != NULL)
+	if ((*L)==NULL)
 	{
 		printf("链表不存在！\n");
 		return ERROR;
 	}
-	DuLinkedList p1, p2;
-	p1 = p2 = *L;//令p1和p2先指向头指针
-	while (p1->next)
+	if ((*L) != NULL && (*L)->next != NULL)
 	{
-		p2 = p1->next;
-		free(p1);
-		p1 = p2->next;
+		DuLinkedList p1, p2;
+		p1 = p2 = (*L)->next;//令p1和p2先指向头指针
+		while (p1)
+		{
+			p2 = p1->next;
+			free(p1);
+			p1 = p2;
+		}
+		(*L) = NULL;//最后使头指针指向空，链表销毁完毕
+		printf("链表销毁完毕！\n");
 	}
-	L = NULL;//最后使头指针指向空，链表销毁完毕
-	if (L == NULL)
-		return SUCCESS;
+	
 };
 /**
  *  @name        : Status InsertBeforeList_DuL(DuLNode *p, LNode *q)
@@ -146,35 +149,44 @@ Status DestroyList_DuL(DuLinkedList* L)
  */
 Status InsertBeforeList_DuL(DuLNode* p, DuLNode* q)
 {
-	if (p == NULL) //p指向空，错误
+	DuLNode* p1 = p;
+	if (p1 == NULL||(p1->next ==NULL&&p1->prior==NULL)) //p为头指针或者链表没初始化
 	{
 		printf("错误\n");
 		return ERROR;
 	}
-	else
+	else 
 	{
-		if (p->prior != NULL)//说明p不是第一个节点，需要插入
-		{
-			DuLNode* pr = NULL;//用以存储插入前p的上一个节点
-			pr = p->prior;
-			pr->next = q;
-			q->next = p;
-			p->prior = q;
-			q->prior = pr;
-			printf("插入成功！\n");
-			return SUCCESS;
-
-		}
-		if (p->prior == NULL)//说明p为第一个节点，令q成为第一个节点即可
-		{
-			p->prior = q;
-			q->next = p;
-			printf("插入成功！\n");
-			return SUCCESS;
-
-
-		}
+		DuLNode* pr = NULL;//用以存储插入前p的上一个节点
+		pr = p1->prior;
+		pr->next = q;
+		q->next = p1;
+		p1->prior = q;
+		q->prior = pr;
+		printf("插入成功！\n");
+		return SUCCESS;
 	}
+	//if (p1 != NULL && p1->next == NULL)//说明此节点为链表的末尾节点
+	//{
+	//	
+	//	printf("插入成功！\n");
+	//	return SUCCESS;
+	//}
+	//if (p1->next != NULL)//说明此节点不是最后一个节点
+	//{
+	//	DuLNode* pr = NULL;//用以存储插入前p的上一个节点
+	//	pr = p1->prior;
+	//	pr->next = q;
+	//	q->next = p1;
+	//	p1->prior = q;
+	//	q->prior = pr;
+	//	printf("插入成功！\n");
+	//	return SUCCESS;
+
+	//}
+		
+		
+	
 }
 ;
 
@@ -185,34 +197,39 @@ Status InsertBeforeList_DuL(DuLNode* p, DuLNode* q)
  *	@return		 : status
  *  @notice      : None
  */
-Status InsertAfterList_DuL(DuLNode* p, DuLNode* q)
+Status InsertAfterList_DuL(DuLNode* p, DuLNode* q)//未测试
 {
-	if (p == NULL) //p指向空，错误
+	DuLNode* p1 = p;
+
+	if (p1 == NULL)//链表还未初始化
 	{
-		printf("错误\n");
+		printf("错误!\n");
 		return ERROR;
 	}
-	else
+	else 
 	{
-		if (p->next != NULL)//说明p不是最后一个节点
+		if (p1->next == NULL)//当p1为链表的最后一个节点时，ne->prior是不存在的
 		{
-			DuLNode* ne = NULL;//用以存储插入前p的下一个节点
-			ne = p->next;
-			ne->prior = q;
+			DuLNode* ne;//用以存储插入前head的下一个节点
+			ne = p1->next;
+			p1->next = q;
 			q->next = ne;
-			p->next = q;
-			q->prior = p;
-
+			q->prior = p1;
+			printf("插入完成！\n");
+			p = p1;
 			return SUCCESS;
 		}
-		if (p->next == NULL)//说明p为最后一个节点，令q成为最后一个节点即可
+		else
 		{
-			p->next = q;
-			q->prior = p;
-			q->next = NULL;
-			printf("插入成功！\n");
+			DuLNode* ne;//用以存储插入前head的下一个节点
+			ne = p1->next;
+			p1->next = q;
+			q->next = ne;
+			ne->prior = q;
+			q->prior = p1;
+			printf("插入完成！\n");
+			p = p1;
 			return SUCCESS;
-
 		}
 	}
 };
@@ -269,21 +286,19 @@ void visitData(ElemType* e)//访问当前节点的数据
 void TraverseList_DuL(DuLinkedList L, void (*visit)(ElemType* e))
 {
 	ElemType* e = NULL;
-	if (L->prior != NULL)
+	if (L==NULL||L->next ==NULL)//未初始化
 	{
 		printf("链表为空，请输入数据后再尝试遍历！\n");//报错机制
 	}
 	else
 	{
 		DuLNode* q = L->next;//第一个
-		if (q->prior == NULL)
+		while (q != NULL)//当L不指向空时
 		{
-			while (q != NULL)//当L不指向空时
-			{
-				visit(&(q->data));
-				q = q->next;
-			}
+			visit(&(q->data));
+			q = q->next;
 		}
+		
 	}
 
 
@@ -336,9 +351,7 @@ DuLNode* GetQ(char string[])
 		gets(string);
 	}
 	q->data = translate(string);
-
 	return q;
-
 
 }
 
@@ -352,41 +365,42 @@ DuLNode* GetQ(char string[])
  */
 DuLNode* GetP(DuLinkedList* head)
 {
+	DuLinkedList* L = head;//传入的是指向链表头指针的指针
 	char string[100] = "0";//用于存储输入的data
 	int jud = 0;//判断是否找到对应的节点
-	if (*head == NULL)
+	DuLNode* p = NULL;
+	if ((*L) == NULL)//链表没有初始化
 	{
-		printf("链表不存在！\n");
+		printf("链表不存在！");
 		return NULL;
 	}
-	if ((*head)->next == NULL && (*head)->prior == NULL)//说明只存在头指针
+	if ((*L)->next == NULL)//说明无节点
 	{
-		printf("仅存在头指针,已将刚才的数值作为第一个节点存放！\n");
+		printf("链表为空！");
 		return *head;
 	}
-	if ((*head)->next != NULL)
+	if ((*L)->next != NULL)//说明头指针指向的地方有节点，链表存在
 	{
-		DuLinkedList tem = *head;//用一个tem指针来指向头指针
 		printf("请输入p节点的data：\n");
 		gets(string);
 		if (judge(string))
 		{
-
-			while (tem)
+			DuLNode* Travel = (*L)->next;//创建遍历指针
+			int tem = translate(string);//用于存储转换后的数据data
+			while (Travel)
 			{
-				if ((tem)->data == translate(string))
+				if (Travel->data == tem)
 				{
-
 					jud = 1;
-					return tem;
+					return Travel;//返回找到的指针
 				}
-				tem = (tem)->next;
+				Travel = Travel->next;
 			}
-			if (jud == 0)
-			{
-				printf("未找到该数值对应的节点，请检查\n");
-			}
+			printf("未找到该数值对应的节点\n");
+			return NULL;
+
 		}
+
 	}
 }
 
@@ -435,7 +449,4 @@ void main()
 	}
 
 	return 0;
-
-
-
 }
