@@ -1,0 +1,19 @@
+﻿  LQueue.c
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(45,29): warning C4273: “atof”: dll 链接不一致
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\stdlib.h(450,62): message : 参见“atof”的前一个定义
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(54,11): warning C4473: “scanf_s”: 没有为格式字符串传递足够的参数
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(54,11): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(54,11): message : 缺失的可变参数 2 为格式字符串“%c”所需
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(54,11): message : 此参数用作缓冲区大小
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(108,18): warning C4267: “=”: 从“size_t”转换到“int”，可能丢失数据
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(155,27): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(176,10): warning C4473: “scanf_s”: 没有为格式字符串传递足够的参数
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(176,10): message : 占位符和其参数预计 2 可变参数，但提供的却是 1 参数
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(176,10): message : 缺失的可变参数 2 为格式字符串“%c”所需
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(176,10): message : 此参数用作缓冲区大小
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(282,11): warning C4267: “return”: 从“size_t”转换到“int”，可能丢失数据
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(387,3): warning C4033: “TraverseLQueue”必须返回值
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(263): warning C4715: “GetHeadLQueue”: 不是所有的控件路径都返回值
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(311): warning C4715: “EnLQueue”: 不是所有的控件路径都返回值
+D:\VS2022\qg1\LQueueDemo2\LQueueDemo2\LQueue.c(401): warning C4715: “TraverseLQueue”: 不是所有的控件路径都返回值
+  LQueueDemo2.vcxproj -> D:\VS2022\qg1\LQueueDemo2\x64\Debug\LQueueDemo2.exe
